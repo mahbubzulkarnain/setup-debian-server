@@ -1,10 +1,7 @@
 #!/usr/bin/env bash
 
 # Request root access privilage
-if [[ $EUID != 0 ]]; then
-    sudo "$0" "$@"
-    exit $?
-fi
+[[ "$UID" -eq 0 ]] || exec sudo bash "$0" "$@"
 
 echo "Update..."
 sudo apt-get update
